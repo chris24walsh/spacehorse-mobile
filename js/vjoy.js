@@ -40,7 +40,12 @@
     up: false,
     down: false,
     left: false,
-    right: false
+    right: false,
+    deltaX: false,
+    deltaY: false,
+    rotation: false,
+    angle: false,
+    magnitude: false
   };
 
   Phaser.Plugin.VJoy.prototype.speed = {
@@ -150,6 +155,11 @@
     this.cursors.down = (deltaY > 0);
     this.cursors.left = (deltaX < 0);
     this.cursors.right = (deltaX > 0);
+    this.cursors.deltaX = deltaX;
+    this.cursors.deltaY = deltaY;
+    this.cursors.rotation = angle;
+    this.cursors.angle = angle * 180/Math.PI;
+    this.cursors.magnitude = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
 
     this.imageGroup.forEach(function (e, i) {
       e.cameraOffset.x = initialPoint.x + (deltaX) * i / 3;
