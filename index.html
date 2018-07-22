@@ -1,0 +1,68 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+	<title>Phaser - Making your first game, part 1</title>
+    <script src="//cdn.jsdelivr.net/phaser/2.6.2/phaser.min.js"></script>
+		<!-- Add the vjoy plugin -->
+    <script src="js/vjoy.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+//Globals and constants (bad code is bad)
+speed = 1;
+maxSpeed = 10;
+
+var game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+function preload() {
+	background = game.load.image('background', 'assets/backgroundSprite.png');
+	ship = game.load.image('ship', 'assets/red_ship.png');
+
+	//Vjoy joystick assets
+  game.load.image('vjoy_base', 'assets/vjoy/base.png');
+  game.load.image('vjoy_body', 'assets/vjoy/body.png');
+  game.load.image('vjoy_cap', 'assets/vjoy/cap.png');
+}
+
+function create() {
+	//World
+	game.world.setBounds(0, 0, 1000000, 1000000);
+	game.physics.startSystem(Phaser.Physics.P2JS);
+
+  //Sprites
+	background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'background');
+	ship = game.add.sprite(game.world.width/2, game.world.height/2, 'ship');
+	game.physics.p2.enable(ship);
+	ship.scale.setTo(0.5);
+	ship.body.angle = 0;
+
+	//Camera
+	game.camera.follow(ship);
+
+	// Register the VJoy plugin 
+  game.vjoy = game.plugins.add(Phaser.Plugin.VJoy);
+	// Select an area of the canvas where the joystick should be available
+  game.vjoy.inputEnable(0, 0, game.width, game.height);
+	
+}
+
+function update() {
+  // Retrieve the cursors value
+  cursors = game.vjoy.cursors;
+
+	//Spin ship into direction of joystick's vector
+	// ...
+}
+
+</script>
+
+</body>
+</html>
