@@ -17,8 +17,9 @@
 <script type="text/javascript">
 
 //Globals and constants (bad code is bad)
-speed = 1;
+speed = 0.1;
 maxSpeed = 10;
+turningSpeed = 5;
 
 var game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
@@ -51,7 +52,7 @@ function create() {
   game.vjoy = game.plugins.add(Phaser.Plugin.VJoy);
 	// Select an area of the canvas where the joystick should be available
   game.vjoy.inputEnable(0, 0, game.width, game.height);
-	
+
 }
 
 function update() {
@@ -59,7 +60,33 @@ function update() {
   cursors = game.vjoy.cursors;
 
 	//Spin ship into direction of joystick's vector
-	// ...
+	if (Math.abs(ship.body.angle - cursors.angle) < 10) ship.body.angle = cursors.angle;
+	else if (ship.body.angle > 0 && cursors.angle > 0)
+	{
+		if (ship.body.angle > cursors.angle) ship.body.angle -= turningSpeed;
+		else ship.body.angle += turningSpeed;
+	}
+	else if (ship.body.angle < 0 && cursors.angle < 0)
+	{
+		if (ship.body.angle > cursors.angle) ship.body.angle -= turningSpeed;
+		else ship.body.angle += turningSpeed;
+	}
+	else if (ship.body.angle > 0 && cursors.angle < 0)
+	{
+		if (ship.body.angle - Math.abs(cursors.angle) < 180) ship.body.angle -= turningSpeed;
+		else ship.body.angle += turningSpeed;
+	}
+	else if (ship.body.angle < 0 && cursors.angle > 0)
+	{
+		if (cursors.angle - Math.abs(ship.body.angle) > 180 ) ship.body.angle -= turningSpeed;
+		else ship.body.angle += turningSpeed;
+	}
+
+	//Accelerate ship
+	if (cursors.magnitude > 0) {
+		ship.body.x += cursors.deltaX * speed;
+		ship.body.y += cursors.deltaY * speed;
+	}
 }
 
 </script>
