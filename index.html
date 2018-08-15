@@ -61,7 +61,7 @@ function update() {
 
 	//Spin ship into direction of joystick's vector
 	if (Math.abs(ship.body.angle - cursors.angle) < 10) ship.body.angle = cursors.angle;
-	else if (ship.body.angle > 0 && cursors.angle > 0)
+	else if (ship.body.angle >= 0 && cursors.angle >= 0)
 	{
 		if (ship.body.angle > cursors.angle) ship.body.angle -= turningSpeed;
 		else ship.body.angle += turningSpeed;
@@ -71,14 +71,14 @@ function update() {
 		if (ship.body.angle > cursors.angle) ship.body.angle -= turningSpeed;
 		else ship.body.angle += turningSpeed;
 	}
-	else if (ship.body.angle > 0 && cursors.angle < 0)
+	else if (ship.body.angle >= 0 && cursors.angle < 0)
 	{
 		if (ship.body.angle - Math.abs(cursors.angle) < 180) ship.body.angle -= turningSpeed;
 		else ship.body.angle += turningSpeed;
 	}
-	else if (ship.body.angle < 0 && cursors.angle > 0)
+	else if (ship.body.angle < 0 && cursors.angle >= 0)
 	{
-		if (cursors.angle - Math.abs(ship.body.angle) > 180 ) ship.body.angle -= turningSpeed;
+		if (cursors.angle - Math.abs(ship.body.angle) >= 180 ) ship.body.angle -= turningSpeed;
 		else ship.body.angle += turningSpeed;
 	}
 
