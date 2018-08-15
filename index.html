@@ -17,8 +17,7 @@
 <script type="text/javascript">
 
 //Globals and constants (bad code is bad)
-speed = 0.1;
-maxSpeed = 10;
+maxSpeed = 0.1;
 turningSpeed = 5;
 
 var game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, '', { preload: preload, create: create, update: update });
@@ -84,8 +83,13 @@ function update() {
 
 	//Move ship forward
 	if (cursors.magnitude > 0) {
-		ship.body.x += Math.cos(ship.body.rotation) * cursors.magnitude * 0.1;
-		ship.body.y += Math.sin(ship.body.rotation) * cursors.magnitude * 0.1;
+		if (acceleration < 1) acceleration += 0.1;
+		speed = maxSpeed * acceleration;
+		ship.body.x += Math.cos(ship.body.rotation) * cursors.magnitude * speed;
+		ship.body.y += Math.sin(ship.body.rotation) * cursors.magnitude * speed;
+	}
+	else {
+		acceleration = 0;
 	}
 }
 
