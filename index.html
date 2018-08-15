@@ -87,9 +87,6 @@ function update() {
 		ship.body.x += Math.cos(ship.body.rotation) * cursors.magnitude * 0.1;
 		ship.body.y += Math.sin(ship.body.rotation) * cursors.magnitude * 0.1;
 	}
-
-	console.log("ship: " + ship.body.angle);
-	console.log("joystick: " + cursors.angle);
 }
 
 </script>
