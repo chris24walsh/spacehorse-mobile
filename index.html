@@ -73,12 +73,12 @@ function update() {
 	}
 	else if (ship.body.angle >= 0 && cursors.angle < 0)
 	{
-		if (ship.body.angle - Math.abs(cursors.angle) < 180) ship.body.angle -= turningSpeed;
+		if (ship.body.angle - cursors.angle < 180) ship.body.angle -= turningSpeed;
 		else ship.body.angle += turningSpeed;
 	}
 	else if (ship.body.angle < 0 && cursors.angle >= 0)
 	{
-		if (cursors.angle - Math.abs(ship.body.angle) >= 180 ) ship.body.angle -= turningSpeed;
+		if (cursors.angle - ship.body.angle >= 180 ) ship.body.angle -= turningSpeed;
 		else ship.body.angle += turningSpeed;
 	}
 
