@@ -82,11 +82,14 @@ function update() {
 		else ship.body.angle += turningSpeed;
 	}
 
-	//Accelerate ship
+	//Move ship forward
 	if (cursors.magnitude > 0) {
-		ship.body.x += cursors.deltaX * speed;
-		ship.body.y += cursors.deltaY * speed;
+		ship.body.x += Math.cos(ship.body.rotation) * cursors.magnitude * 0.1;
+		ship.body.y += Math.sin(ship.body.rotation) * cursors.magnitude * 0.1;
 	}
+
+	console.log("ship: " + ship.body.angle);
+	console.log("joystick: " + cursors.angle);
 }
 
 </script>
