@@ -1,0 +1,43 @@
+Verb List for new space game:
+
+fly (mouse/finger to drag in direction to go)
+start/stop (sidescreen button/keyboard key)
+land (double clicking on landing site)
+shoot (sidescreen button/keyboard key)
+fight (evade/chase/shoot enemies)
+collect (scrap/ore/credits)
+sell (scrap/ore)
+buy (weapons/armour/engines)
+upgrade (weapon/armour/speed)
+
+Objects:
+
+ship (has sprite, location, actions, properties)
+inventory (has actions, properties, can store new things)
+map (has sprite, fixed location, child objects)
+
+
+Game states:
+
+Go straight to world
+ - Print to display
+   - Print background
+   - Print interaction objects
+   - Print ship
+   - Print joystick
+
+ - Read input
+  - From joystick
+
+ - Perform update of game logic
+  - Update ships velocity, based on current velocity and joystick input
+
+
+
+  pushing the joystick causes the ship to slowly turn towards that direction and to begin to accelerate until max speed (according to magnitude of joystick)
+
+  letting go of joystick allows the ship to continue to fly along last input
+
+  pushing again should not immediately slow ship if joystick mag is less than previous velocity, only after 0.5 seconds it will decelerate
+
+  acceleration/deceleration is 
